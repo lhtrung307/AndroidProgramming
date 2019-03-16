@@ -13,3 +13,8 @@ Bước 5: Fix conflict (nếu có) trong khi chúng ta pull ở repo github v�
 * Bước 2: git commit -m "<Lời nhắn>" một lần nữa để lưu lại những gì đã fix. Nhớ đặt lời nhắn về những gì đã fix.  
 
 Bước 6: git push để push local repo lên repo ở github. Và chúng ta đã hoàn thành công việc push bài lên repo để lưu lại những gì chúng ta đã làm.  
+
+Nếu gặp lỗi ```Installation failed with message Invalid File```:
+Click Build tab ---> Clean Project  
+Click Build tab ---> Build APK  
+Run.  
