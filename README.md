@@ -1,4 +1,4 @@
-# AndroidProgramming
+﻿# AndroidProgramming
 Lập trình ứng dụng di động
 
 
@@ -18,3 +18,4 @@ Nếu gặp lỗi ```Installation failed with message Invalid File```:
 Click Build tab ---> Clean Project  
 Click Build tab ---> Build APK  
 Run.  
+#Toan da sua
