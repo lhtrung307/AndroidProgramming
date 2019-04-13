@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.baitap.Adapter.MainViewPagerAdapter;
+import com.example.baitap.Fragment.Fragment_Playlist;
 import com.example.baitap.Fragment.Fragment_Tim_Kiem;
 import com.example.baitap.Fragment.Fragment_Trang_Chu;
 import com.example.baitap.R;
@@ -27,10 +28,12 @@ public class MainActivity extends AppCompatActivity {
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         mainViewPagerAdapter.addFragment(new Fragment_Trang_Chu(), "Trang Chu");
         mainViewPagerAdapter.addFragment(new Fragment_Tim_Kiem(), "Tim Kiem");
+        mainViewPagerAdapter.addFragment(new Fragment_Playlist(), "Cá nhân");
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
         tabLayout.getTabAt(1).setIcon(R.drawable.icontimkiem);
+        tabLayout.getTabAt(2).setIcon(R.drawable.user32);
     }
 
     private void anhxa(){
