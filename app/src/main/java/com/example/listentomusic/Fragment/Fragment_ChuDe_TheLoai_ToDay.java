@@ -58,13 +58,12 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
                 final  ArrayList<TheLoai> theLoaiArrayList = new ArrayList<TheLoai>();
                 theLoaiArrayList.addAll(theloaitrongngay.getTheLoai());
-
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(580, 250);
                 layoutParams.setMargins(10, 20,10, 30);
 
-                for(int i=0; i<chuDeArrayList.size(); i++){
+                for(int i=0; i< chuDeArrayList.size(); i++){
                     CardView cardView = new CardView(getActivity());
                     cardView.setRadius(10);
                     ImageView imageView = new ImageView(getActivity());
@@ -77,17 +76,17 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     linearLayout.addView(cardView);
                 }
 
-                for(int j=0; j<theLoaiArrayList.size(); j++){
+                for(int j=0; j < theLoaiArrayList.size(); j++){
                     CardView cardView = new CardView(getActivity());
                     cardView.setRadius(10);
                     ImageView imageView = new ImageView(getActivity());
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                     if(theLoaiArrayList.get(j).getHinhTheloai()  !=null){
                         Picasso.with(getActivity()).load(theLoaiArrayList.get(j).getHinhTheloai()).into(imageView);
-
                     }
                     cardView.setLayoutParams(layoutParams);
                     cardView.addView(imageView);
+                    linearLayout.addView(cardView);
 
                     final int finalJ = j;
                     imageView.setOnClickListener(new View.OnClickListener() {
