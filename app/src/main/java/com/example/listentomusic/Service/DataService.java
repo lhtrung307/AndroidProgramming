@@ -2,8 +2,10 @@ package com.example.listentomusic.Service;
 
 import com.example.listentomusic.Model.Album;
 import com.example.listentomusic.Model.BaiHat;
+import com.example.listentomusic.Model.ChuDe;
 import com.example.listentomusic.Model.Playlist;
 import com.example.listentomusic.Model.Quangcao;
+import com.example.listentomusic.Model.TheLoai;
 import com.example.listentomusic.Model.Theloaitrongngay;
 
 import java.util.List;
@@ -44,4 +46,11 @@ public interface DataService {
 
     @GET("danhsachplaylist.php")
     Call<List<Playlist>> GetDanhsachCacPlaylist();
+
+    @GET("tatcachude.php")
+    Call<List<ChuDe>> GetAllChuDe();
+
+    @FormUrlEncoded
+    @POST("theloaitheochude.php")
+    Call<List<TheLoai>> GetTheLoaitheochude(@Field("idchude") String idchude);
 }
