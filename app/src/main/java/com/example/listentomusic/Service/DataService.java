@@ -39,4 +39,7 @@ public interface DataService {
     Call<List<BaiHat>> GetDanhsachbaitheoplaylist(@Field("idplaylist") String idplaylist);
 
 
+    @GET("danhsachplaylist.php")
+    Call<List<Playlist>> GetDanhsachCacPlaylist();
+
 }
