@@ -3,128 +3,61 @@ package com.example.listentomusic.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class TheLoai implements Collection<TheLoai> {
+public class TheLoai implements Serializable {
 
-    @SerializedName("IdTheLoai")
+    @SerializedName("idtheloai")
     @Expose
-    private String idTheloai;
-
-    @SerializedName("IdChuDe")
+    private String idtheloai;
+    @SerializedName("idchuDe")
     @Expose
-    private String idChuDe;
+    private String idchuDe;
+    @SerializedName("tentheloai")
+    @Expose
+    private String tentheloai;
+    @SerializedName("hinhtheloai")
+    @Expose
+    private String hinhtheloai;
 
     public TheLoai(String idTheloai, String idChuDe, String tenTheloai, String hinhTheloai) {
-        this.idTheloai = idTheloai;
-        this.idChuDe = idChuDe;
-        this.tenTheloai = tenTheloai;
-        this.hinhTheloai = hinhTheloai;
+        this.idtheloai = idTheloai;
+        this.idchuDe = idChuDe;
+        this.tentheloai = tenTheloai;
+        this.hinhtheloai = hinhTheloai;
     }
 
-    @SerializedName("TenTheLoai")
-    @Expose
-    private String tenTheloai;
-
-    @SerializedName("HinhTheLoai")
-    @Expose
-    private String hinhTheloai;
-
     public String getIdTheloai() {
-        return idTheloai;
+        return idtheloai;
     }
 
     public void setIdTheloai(String idTheloai) {
-        this.idTheloai = idTheloai;
+        this.idtheloai = idTheloai;
     }
 
     public String getIdChuDe() {
-        return idChuDe;
+        return idchuDe;
     }
 
     public void setIdChuDe(String idChuDe) {
-        this.idChuDe = idChuDe;
+        this.idchuDe = idChuDe;
     }
 
     public String getTenTheloai() {
-        return tenTheloai;
+        return tentheloai;
     }
 
     public void setTenTheloai(String tenTheloai) {
-        this.tenTheloai = tenTheloai;
+        this.tentheloai = tenTheloai;
     }
 
     public String getHinhTheloai() {
-        return hinhTheloai;
+        return hinhtheloai;
     }
 
     public void setHinhTheloai(String hinhTheloai) {
-        this.hinhTheloai = hinhTheloai;
-    }
-
-    @Override
-    public int size() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
-    public Iterator<TheLoai> iterator() {
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return null;
-    }
-
-    @Override
-    public boolean add(TheLoai theLoai) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends TheLoai> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
+        this.hinhtheloai = hinhTheloai;
     }
 }

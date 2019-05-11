@@ -27,16 +27,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.dong_album,viewGroup, false);
-
+        View view = layoutInflater.inflate(R.layout.dong_album, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Album album = albums.get(i);
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        Album album = albums.get(position);
         viewHolder.txtcasialbum.setText(album.getTenCaSiAlbum());
         viewHolder.txttenalbum.setText(album.getTenAlbum());
         Picasso.with(context).load(album.getHinhAlbum()).into(viewHolder.imghinhalbum);
@@ -48,11 +47,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         return albums.size();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imghinhalbum;
         TextView txttenalbum, txtcasialbum;
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imghinhalbum = itemView.findViewById(R.id.imageviewalbum);

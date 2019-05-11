@@ -6,28 +6,32 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Quangcao  implements Serializable {
-    @SerializedName("IdQuangCao")
+
+    @SerializedName("id")
     @Expose
-    private String idQuangCao;
-    @SerializedName("Hinhanh")
+    private String id;
+    @SerializedName("hinhanh")
     @Expose
     private String hinhanh;
-    @SerializedName("Noidung")
+    @SerializedName("noidung")
     @Expose
     private String noidung;
-    @SerializedName("IdBaiHat")
+    @SerializedName("idBaiHat")
     @Expose
     private String idBaiHat;
-    @SerializedName("TenBaiHat")
+    @SerializedName("tenbaihat")
     @Expose
-    private String tenBaiHat;
+    private String tenbaihat;
+    @SerializedName("hinhbaihat")
+    @Expose
+    private String hinhbaihat;
 
     public String getIdQuangCao() {
-        return idQuangCao;
+        return id;
     }
 
     public void setIdQuangCao(String idQuangCao) {
-        this.idQuangCao = idQuangCao;
+        this.id = idQuangCao;
     }
 
     public String getHinhanh() {
@@ -55,23 +59,19 @@ public class Quangcao  implements Serializable {
     }
 
     public String getTenBaiHat() {
-        return tenBaiHat;
+        return tenbaihat;
     }
 
     public void setTenBaiHat(String tenBaiHat) {
-        this.tenBaiHat = tenBaiHat;
+        this.tenbaihat = tenBaiHat;
     }
 
     public String getHinhBaiHat() {
-        return hinhBaiHat;
+        return hinhbaihat;
     }
 
     public void setHinhBaiHat(String hinhBaiHat) {
-        this.hinhBaiHat = hinhBaiHat;
+        this.hinhbaihat = hinhBaiHat;
     }
-
-    @SerializedName("HinhBaiHat")
-    @Expose
-    private String hinhBaiHat;
 
 }

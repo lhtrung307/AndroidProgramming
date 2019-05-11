@@ -6,17 +6,18 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Playlist implements Serializable {
-    @SerializedName("IdPlaylist")
+    @SerializedName("idPlaylist")
     @Expose
     private String idPlaylist;
-
-    @SerializedName("Ten")
+    @SerializedName("ten")
     @Expose
     private String ten;
-
-    @SerializedName("HinhPlaylist")
+    @SerializedName("hinhnen")
     @Expose
-    private String hinhPlaylist;
+    private String hinhnen;
+    @SerializedName("hinhicon")
+    @Expose
+    private String hinhicon;
 
     public String getIdPlaylist() {
         return idPlaylist;
@@ -35,23 +36,18 @@ public class Playlist implements Serializable {
     }
 
     public String getHinhPlaylist() {
-        return hinhPlaylist;
+        return hinhnen;
     }
 
     public void setHinhPlaylist(String hinhPlaylist) {
-        this.hinhPlaylist = hinhPlaylist;
+        this.hinhnen = hinhPlaylist;
     }
 
     public String getIcon() {
-        return icon;
+        return hinhicon;
     }
 
     public void setIcon(String icon) {
-        this.icon = icon;
+        this.hinhicon = icon;
     }
-
-    @SerializedName("Icon")
-    @Expose
-    private String icon;
-
 }

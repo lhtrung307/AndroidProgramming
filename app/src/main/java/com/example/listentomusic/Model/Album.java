@@ -3,15 +3,22 @@ package com.example.listentomusic.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 public class Album {
 
-    @SerializedName("IdAlbum")
+    @SerializedName("idAlbum")
     @Expose
     private String idAlbum;
-
-    @SerializedName("TenAlbum")
+    @SerializedName("tenAlbum")
     @Expose
     private String tenAlbum;
+    @SerializedName("tenCasiAlbum")
+    @Expose
+    private String tenCasiAlbum;
+    @SerializedName("hinhAlbum")
+    @Expose
+    private String hinhAlbum;
 
     public String getIdAlbum() {
         return idAlbum;
@@ -30,11 +37,11 @@ public class Album {
     }
 
     public String getTenCaSiAlbum() {
-        return tenCaSiAlbum;
+        return tenCasiAlbum;
     }
 
     public void setTenCaSiAlbum(String tenCaSiAlbum) {
-        this.tenCaSiAlbum = tenCaSiAlbum;
+        this.tenCasiAlbum = tenCaSiAlbum;
     }
 
     public String getHinhAlbum() {
@@ -44,12 +51,4 @@ public class Album {
     public void setHinhAlbum(String hinhAlbum) {
         this.hinhAlbum = hinhAlbum;
     }
-
-    @SerializedName("TenCaSiAlbum")
-    @Expose
-    private String tenCaSiAlbum;
-
-    @SerializedName("HinhAlbum")
-    @Expose
-    private String hinhAlbum;
 }

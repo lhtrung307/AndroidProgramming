@@ -35,7 +35,7 @@
             android:textColor="#9e9797"
             android:textSize="15sp"
             android:maxWidth="200dp"
-            android:text="Nô Phước Thịnh"
+            android:text="Noo Phước Thịnh"
             android:ellipsize="end"
             android:maxLines="1"
             android:id="@+id/textviewtencasialbum"

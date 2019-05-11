@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,15 +51,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
             @Override
             public void onResponse(Call<Theloaitrongngay> call, Response<Theloaitrongngay> response) {
                 Theloaitrongngay theloaitrongngay = response.body();
-
-               final ArrayList<ChuDe> chuDeArrayList = new ArrayList<ChuDe>();
-
-               //demo database
-                theloaitrongngay.setChuDe(new ChuDe("a", "b", "c"));
-                theloaitrongngay.setTheLoai(new TheLoai("z","a", "c","d"));
-
-
-
+                final ArrayList<ChuDe> chuDeArrayList = new ArrayList<ChuDe>();
                 chuDeArrayList.addAll(theloaitrongngay.getChuDe());
 
                 final  ArrayList<TheLoai> theLoaiArrayList = new ArrayList<TheLoai>();
@@ -74,9 +67,8 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     cardView.setRadius(10);
                     ImageView imageView = new ImageView(getActivity());
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    if(chuDeArrayList.get(i).getHinhChuDe()  !=null){
+                    if(chuDeArrayList.get(i).getHinhChuDe() !=null ){
                         Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
-
                     }
                     cardView.setLayoutParams(layoutParams);
                     cardView.addView(imageView);

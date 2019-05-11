@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class Fragment_Album_Hot extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_album_hot,container,false);
+        view = inflater.inflate(R.layout.fragment_album_hot, container,false);
         recyclerViewAlbum = view.findViewById(R.id.recyclerviewAlbum);
         txtxemthemalbum = view.findViewById(R.id.textviewxemthemAlbum);
 
@@ -48,7 +49,8 @@ public class Fragment_Album_Hot extends Fragment {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 ArrayList<Album> albumArrayList = (ArrayList<Album>) response.body();
-                albumAdapter = new AlbumAdapter(getActivity(),albumArrayList);
+                Log.d("BBB", albumArrayList.get(0).getTenAlbum());
+                albumAdapter = new AlbumAdapter(getActivity(), albumArrayList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recyclerViewAlbum.setLayoutManager(linearLayoutManager);
