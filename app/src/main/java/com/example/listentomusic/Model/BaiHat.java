@@ -4,36 +4,31 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class BaiHat {
-    @SerializedName("Idbaihat")
+    @SerializedName("idBaiHat")
     @Expose
-    private String idbauhat;
-
-    @SerializedName("Tenbaihat")
+    private String idBaiHat;
+    @SerializedName("tenbaihat")
     @Expose
     private String tenbaihat;
-
-    @SerializedName("Hinhbaihat")
+    @SerializedName("hinhbaihat")
     @Expose
     private String hinhbaihat;
-
-    @SerializedName("Casi")
+    @SerializedName("casi")
     @Expose
     private String casi;
-
-    @SerializedName("Linkbaihat")
+    @SerializedName("linkbaihat")
     @Expose
     private String linkbaihat;
-
-    @SerializedName("Luotthich")
+    @SerializedName("luotthich")
     @Expose
     private String luotthich;
 
-    public String getIdbauhat() {
-        return idbauhat;
+    public String getIdbaihat() {
+        return idBaiHat;
     }
 
-    public void setIdbauhat(String idbauhat) {
-        this.idbauhat = idbauhat;
+    public void setIdbaihat(String idbauhat) {
+        this.idBaiHat = idbauhat;
     }
 
     public String getTenbaihat() {

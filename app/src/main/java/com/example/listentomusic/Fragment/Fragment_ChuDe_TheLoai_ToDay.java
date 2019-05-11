@@ -1,5 +1,6 @@
 package com.example.listentomusic.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.listentomusic.Activity.DanhsachbaihatActivity;
 import com.example.listentomusic.Model.ChuDe;
 import com.example.listentomusic.Model.TheLoai;
 import com.example.listentomusic.Model.Theloaitrongngay;
@@ -86,7 +88,16 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     }
                     cardView.setLayoutParams(layoutParams);
                     cardView.addView(imageView);
-                    linearLayout.addView(cardView);
+
+                    final int finalJ = j;
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
+                            intent.putExtra("idtheloai", theLoaiArrayList.get(finalJ));
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 horizontalScrollView.addView(linearLayout);

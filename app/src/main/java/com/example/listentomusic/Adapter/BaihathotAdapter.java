@@ -29,8 +29,6 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view=layoutInflater.inflate(R.layout.dong_bai_hat_hot,viewGroup,false);
-
-
         return new ViewHolder(view);
     }
 

@@ -3,8 +3,6 @@ package com.example.listentomusic.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 public class Album {
 
     @SerializedName("idAlbum")

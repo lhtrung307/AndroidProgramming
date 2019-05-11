@@ -11,18 +11,17 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.listentomusic.Adapter.DanhsachbaihatAdapter;
 import com.example.listentomusic.Model.BaiHat;
 import com.example.listentomusic.Model.Playlist;
 import com.example.listentomusic.Model.Quangcao;
+import com.example.listentomusic.Model.TheLoai;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
 import com.example.listentomusic.Service.DataService;
@@ -49,6 +48,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     ArrayList<BaiHat> mangbaihat;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     Playlist playlist;
+    TheLoai theLoai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +57,36 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         anhxa();
         init();
         if(quangcao !=null && !quangcao.getTenBaiHat().equals("")){
-            setValueInVew(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
+            setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
             GetDataquangcao(quangcao.getIdQuangCao());
         }
         if(playlist !=null && !playlist.getTen().equals("")){
-            setValueInVew(playlist.getTen(),playlist.getHinhPlaylist());
+            setValueInView(playlist.getTen(),playlist.getHinhPlaylist());
             GetDataplaylist(playlist.getIdPlaylist());
         }
+        if(theLoai!=null && !theLoai.getTenTheloai().equals("")){
+            setValueInView(theLoai.getTenTheloai(), theLoai.getHinhTheloai());
+            GetDataTheLoai(theLoai.getIdTheloai());
+        }
+    }
+
+    private void GetDataTheLoai(String idtheloai){
+        DataService dataService = APIService.getService();
+        Call<List<BaiHat>> callback = dataService.GetDanhsachbaihattheotheloai(idtheloai);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                mangbaihat = (ArrayList<BaiHat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void GetDataplaylist(String idplaylist) {
@@ -106,7 +129,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 
     }
 
-    private void setValueInVew(String ten, String hinh) {
+    private void setValueInView(String ten, String hinh) {
         collapsingToolbarLayout.setTitle(ten);
         try {
             URL url =new URL(hinh);
@@ -155,6 +178,10 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         if (intent.hasExtra("itemplaylist")){
             playlist = (Playlist) intent.getSerializableExtra("itemplaylist");
 
+        }
+
+        if(intent.hasExtra("idtheloai")){
+            theLoai = (TheLoai) intent.getSerializableExtra("idtheloai");
         }
 
     }
