@@ -12,9 +12,15 @@ import android.widget.Toast;
 
 import com.example.listentomusic.Model.BaiHat;
 import com.example.listentomusic.R;
+import com.example.listentomusic.Service.APIService;
+import com.example.listentomusic.Service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.ViewHolder>  {
     Context context;
@@ -57,18 +63,32 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
             txtcasi = itemView.findViewById(R.id.textviewcasibaihathot);
             imghinh = itemView.findViewById(R.id.imageviewbaihathot);
             imgluotthich =itemView.findViewById(R.id.imageviewluotthich);
-    imgluotthich.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            Toast.makeText(context, baiHats.get(getPosition()).getTenbaihat(), Toast.LENGTH_SHORT).show();
-        }
-    });
-    itemView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-        }
-    });
+            imgluotthich.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imgluotthich.setImageResource(R.drawable.iconloved);
+                    DataService dataService = APIService.getService();
+                    Call<String> callback = dataService.UpdateLuotThich("1", baiHats.get(getPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua = response.body();
+                            if (ketqua.equals("Success")){
+                                Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    imgluotthich.setEnabled(false);
+                }
+            });
         }
     }
 }
