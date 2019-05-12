@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.listentomusic.Adapter.DanhsachbaihatAdapter;
+import com.example.listentomusic.Model.Album;
 import com.example.listentomusic.Model.BaiHat;
 import com.example.listentomusic.Model.Playlist;
 import com.example.listentomusic.Model.Quangcao;
@@ -49,6 +50,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     Playlist playlist;
     TheLoai theLoai;
+    Album album;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,30 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             setValueInView(theLoai.getTenTheloai(), theLoai.getHinhTheloai());
             GetDataTheLoai(theLoai.getIdTheloai());
         }
+        if(album != null && !album.getTenAlbum().equals("")){
+            setValueInView(album.getTenAlbum(), album.getHinhAlbum());
+            GetDataAlbum(album.getIdAlbum());
+        }
+    }
+
+    private void GetDataAlbum(String idAlbum) {
+        DataService dataService = APIService.getService();
+        Call<List<BaiHat>> callback = dataService.GetDanhsachbaihattheoalbum(idAlbum);
+callback.enqueue(new Callback<List<BaiHat>>() {
+    @Override
+    public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+        mangbaihat = (ArrayList<BaiHat>) response.body();
+        danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+        recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+        recyclerViewDanhSachBaiHat.setAdapter(danhsachbaihatAdapter);
+    }
+
+    @Override
+    public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+    }
+});
+
     }
 
     private void GetDataTheLoai(String idtheloai){
@@ -183,6 +209,10 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         if(intent.hasExtra("idtheloai")){
             theLoai = (TheLoai) intent.getSerializableExtra("idtheloai");
         }
+if(intent.hasExtra("album")){
+    album = (Album) intent.getSerializableExtra("album");
+
+}
 
     }
 }
