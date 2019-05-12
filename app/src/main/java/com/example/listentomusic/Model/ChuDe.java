@@ -9,9 +9,9 @@ import java.util.Iterator;
 
 public class ChuDe implements Serializable {
 
-    @SerializedName("idChuDe")
+    @SerializedName("idchude")
     @Expose
-    private String idChuDe;
+    private String idchude;
     @SerializedName("tenchude")
     @Expose
     private String tenchude;
@@ -19,26 +19,26 @@ public class ChuDe implements Serializable {
     @Expose
     private String hinhchude;
 
-    public ChuDe(String idChuDe, String ten, String hinhChuDe) {
-        this.idChuDe = idChuDe;
+    public ChuDe(String idChuDe, String ten, String hinhchude) {
+        this.idchude = idChuDe;
         this.tenchude = ten;
-        this.hinhchude = hinhChuDe;
+        this.hinhchude = hinhchude;
     }
 
     public String getIdChuDe() {
-        return idChuDe;
+        return idchude;
     }
 
-    public void setIdChuDe(String idChuDe) {
-        this.idChuDe = idChuDe;
+    public void setIdChuDe(String idchude) {
+        this.idchude = idchude;
     }
 
     public String getTen() {
         return tenchude;
     }
 
-    public void setTen(String ten) {
-        this.tenchude = ten;
+    public void setTen(String tenchude) {
+        this.tenchude = tenchude;
     }
 
     public String getHinhChuDe() {

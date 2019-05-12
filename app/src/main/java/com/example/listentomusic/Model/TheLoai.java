@@ -4,17 +4,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Iterator;
 
 public class TheLoai implements Serializable {
 
     @SerializedName("idtheloai")
     @Expose
     private String idtheloai;
-    @SerializedName("idchuDe")
+    @SerializedName("idchude")
     @Expose
-    private String idchuDe;
+    private String idchude;
     @SerializedName("tentheloai")
     @Expose
     private String tentheloai;
@@ -22,9 +20,9 @@ public class TheLoai implements Serializable {
     @Expose
     private String hinhtheloai;
 
-    public TheLoai(String idTheloai, String idChuDe, String tenTheloai, String hinhTheloai) {
+    public TheLoai(String idTheloai, String idchude, String tenTheloai, String hinhTheloai) {
         this.idtheloai = idTheloai;
-        this.idchuDe = idChuDe;
+        this.idchude = idchude;
         this.tentheloai = tenTheloai;
         this.hinhtheloai = hinhTheloai;
     }
@@ -38,11 +36,11 @@ public class TheLoai implements Serializable {
     }
 
     public String getIdChuDe() {
-        return idchuDe;
+        return idchude;
     }
 
     public void setIdChuDe(String idChuDe) {
-        this.idchuDe = idChuDe;
+        this.idchude = idChuDe;
     }
 
     public String getTenTheloai() {
