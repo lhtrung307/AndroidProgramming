@@ -86,6 +86,7 @@ callback.enqueue(new Callback<List<BaiHat>>() {
         danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
         recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
         recyclerViewDanhSachBaiHat.setAdapter(danhsachbaihatAdapter);
+    eventClick();
     }
 
     @Override
@@ -106,6 +107,7 @@ callback.enqueue(new Callback<List<BaiHat>>() {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewDanhSachBaiHat.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -125,6 +127,7 @@ callback.enqueue(new Callback<List<BaiHat>>() {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewDanhSachBaiHat.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -144,7 +147,7 @@ callback.enqueue(new Callback<List<BaiHat>>() {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
                 recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewDanhSachBaiHat.setAdapter(danhsachbaihatAdapter);
-
+                eventClick();
             }
 
             @Override
@@ -183,7 +186,7 @@ callback.enqueue(new Callback<List<BaiHat>>() {
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-
+floatingActionButton.setEnabled(false);
     }
 
     private void anhxa() {
@@ -209,10 +212,23 @@ callback.enqueue(new Callback<List<BaiHat>>() {
         if(intent.hasExtra("idtheloai")){
             theLoai = (TheLoai) intent.getSerializableExtra("idtheloai");
         }
-if(intent.hasExtra("album")){
-    album = (Album) intent.getSerializableExtra("album");
+        if(intent.hasExtra("album")){
+            album = (Album) intent.getSerializableExtra("album");
 
-}
+        }
 
+    }
+
+    private void eventClick(){
+floatingActionButton.setEnabled(true);
+floatingActionButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(DanhsachbaihatActivity.this, PlayNhacActivity.class);
+    intent.putExtra("cacbaihat", mangbaihat);
+        startActivity(intent);
+
+    }
+});
     }
 }
