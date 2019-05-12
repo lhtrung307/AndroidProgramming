@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.listentomusic.Activity.SongsActivity;
-import com.example.listentomusic.Activity.DanhsachtatcachudeActivity;
+import com.example.listentomusic.Activity.AllGenresActivity;
 import com.example.listentomusic.Activity.DanhsachtheloaitheochudeActivity;
 import com.example.listentomusic.Model.Category;
 import com.example.listentomusic.Model.Genre;
@@ -44,7 +44,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
         txtxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhsachtatcachudeActivity.class);
+                Intent intent = new Intent(getActivity(), AllGenresActivity.class);
                 startActivity(intent);
             }
         });

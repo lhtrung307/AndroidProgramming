@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhsachtatcachudeActivity extends AppCompatActivity {
+public class AllGenresActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewtatcachude;
     Toolbar toolbartatcachude;
@@ -40,8 +40,8 @@ public class DanhsachtatcachudeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 ArrayList<Category> categories = (ArrayList<Category>) response.body();
-                allGenresAdapter = new AllGenresAdapter(DanhsachtatcachudeActivity.this, categories);
-                recyclerViewtatcachude.setLayoutManager(new GridLayoutManager(DanhsachtatcachudeActivity.this, 1));
+                allGenresAdapter = new AllGenresAdapter(AllGenresActivity.this, categories);
+                recyclerViewtatcachude.setLayoutManager(new GridLayoutManager(AllGenresActivity.this, 1));
                 recyclerViewtatcachude.setAdapter(allGenresAdapter);
             }
 

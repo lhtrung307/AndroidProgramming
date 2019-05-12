@@ -30,8 +30,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void AnhXa(){
-        edtuser=(EditText)findViewById(R.id.edittextuser);
-        edtpassword=(EditText)findViewById(R.id.edittextpassword);
+        edtuser=(EditText)findViewById(R.id.edittextuserlogin);
+        edtpassword=(EditText)findViewById(R.id.edittextpasswordlogin);
         btndangnhap=(Button)findViewById(R.id.buttondangnhap);
         tvdangky=(TextView)findViewById(R.id.txtdangky);
     }

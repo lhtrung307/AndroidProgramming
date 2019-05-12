@@ -22,7 +22,7 @@
         <activity android:name=".Activity.PlayNhacActivity" />
         <activity android:name=".Activity.AllAlbumsActivity" />
         <activity android:name=".Activity.DanhsachtheloaitheochudeActivity" />
-        <activity android:name=".Activity.DanhsachtatcachudeActivity" />
+        <activity android:name=".Activity.AllGenresActivity" />
         <activity android:name=".Activity.AllPlaylistsActivity" />
         <activity android:name=".Activity.SongsActivity" />
         <activity android:name=".Activity.MainActivity" />
