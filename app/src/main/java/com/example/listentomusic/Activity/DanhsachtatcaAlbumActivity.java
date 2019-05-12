@@ -41,14 +41,15 @@ public class DanhsachtatcaAlbumActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 ArrayList<Album> mangalbum = (ArrayList<Album>) response.body();
-allAlbumAdapter = new AllAlbumAdapter(DanhsachtatcaAlbumActivity.this, mangalbum);
-recyclerViewAllAlbum.setLayoutManager(new GridLayoutManager(DanhsachtatcaAlbumActivity.this, 2));
-recyclerViewAllAlbum.setAdapter(allAlbumAdapter);
+                Log.d("BBB", "ten album" + mangalbum.get(0).getTenAlbum());
+                allAlbumAdapter = new AllAlbumAdapter(DanhsachtatcaAlbumActivity.this, mangalbum);
+                recyclerViewAllAlbum.setLayoutManager(new GridLayoutManager(DanhsachtatcaAlbumActivity.this, 2));
+                recyclerViewAllAlbum.setAdapter(allAlbumAdapter);
             }
 
             @Override
             public void onFailure(Call<List<Album>> call, Throwable t) {
-
+                Log.d("BBB", "Cant get data");
             }
         });
     }
