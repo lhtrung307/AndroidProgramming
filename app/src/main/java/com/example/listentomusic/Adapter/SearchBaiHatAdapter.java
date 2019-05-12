@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.listentomusic.Activity.PlayNhacActivity;
 import com.example.listentomusic.Model.BaiHat;
@@ -20,6 +21,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder> {
 
@@ -67,8 +70,8 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlayNhacActivity.class);
-//                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
-//                    context.startActivity(intent);
+                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
+                    context.startActivity(intent);
                 }
             });
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +79,27 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                 public void onClick(View v) {
                     imgLuotThich.setImageResource(R.drawable.iconloved);
                     DataService dataService = APIService.getService();
+                    Call<String> callback = dataService.UpdateLuotThich("1", mangbaihat.get(getPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua = response.body();
+                            if (ketqua.equals("Success")){
+                                Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    imgLuotThich.setEnabled(false);
                 }
             });
+
         }
     }
 }
