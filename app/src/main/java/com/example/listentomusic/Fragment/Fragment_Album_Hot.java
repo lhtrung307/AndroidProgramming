@@ -11,11 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.listentomusic.Activity.DanhsachtatcaAlbumActivity;
-import com.example.listentomusic.Activity.MainActivity;
+import com.example.listentomusic.Activity.AllAlbumsActivity;
 import com.example.listentomusic.Adapter.AlbumAdapter;
 import com.example.listentomusic.Model.Album;
 import com.example.listentomusic.R;
@@ -43,7 +41,7 @@ public class Fragment_Album_Hot extends Fragment {
         txtxemthemalbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhsachtatcaAlbumActivity.class);
+                Intent intent = new Intent(getActivity(), AllAlbumsActivity.class);
                 startActivity(intent);
             }
         });

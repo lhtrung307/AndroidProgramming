@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.listentomusic.Activity.DanhsachbaihatActivity;
-import com.example.listentomusic.Model.TheLoai;
+import com.example.listentomusic.Activity.SongsActivity;
+import com.example.listentomusic.Model.Genre;
 import com.example.listentomusic.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,11 +20,11 @@ import java.util.ArrayList;
 public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<DanhsachtheloaitheochudeAdapter.ViewHolder>{
 
     Context context;
-    ArrayList<TheLoai> theLoais;
+    ArrayList<Genre> genres;
 
-    public DanhsachtheloaitheochudeAdapter(Context context, ArrayList<TheLoai> theLoais) {
+    public DanhsachtheloaitheochudeAdapter(Context context, ArrayList<Genre> genres) {
         this.context = context;
-        this.theLoais = theLoais;
+        this.genres = genres;
     }
 
     @NonNull
@@ -37,14 +37,14 @@ public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<Danhsa
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        TheLoai theLoai = theLoais.get(i);
-        Picasso.with(context).load(theLoai.getHinhTheloai()).into(viewHolder.imghinhnen);
-        viewHolder.txttentheloai.setText(theLoai.getTenTheloai());
+        Genre genre = genres.get(i);
+        Picasso.with(context).load(genre.getHinhTheloai()).into(viewHolder.imghinhnen);
+        viewHolder.txttentheloai.setText(genre.getTenTheloai());
     }
 
     @Override
     public int getItemCount() {
-        return theLoais.size();
+        return genres.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,8 +57,8 @@ public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<Danhsa
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-                    intent.putExtra("idtheloai", theLoais.get(getPosition()));
+                    Intent intent = new Intent(context, SongsActivity.class);
+                    intent.putExtra("idtheloai", genres.get(getPosition()));
                     context.startActivity(intent);
                 }
             });

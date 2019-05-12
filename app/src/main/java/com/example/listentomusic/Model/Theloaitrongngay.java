@@ -9,24 +9,24 @@ public class Theloaitrongngay {
 
     @SerializedName("TheLoai")
     @Expose
-    private ArrayList<TheLoai> theLoai = null;
+    private ArrayList<Genre> genre = null;
     @SerializedName("ChuDe")
     @Expose
-    private ArrayList<ChuDe> chuDe = null;
+    private ArrayList<Category> categories = null;
 
-    public ArrayList<TheLoai> getTheLoai() {
-        return theLoai;
+    public ArrayList<Genre> getGenre() {
+        return genre;
     }
 
-    public void setTheLoai(ArrayList<TheLoai> theLoai) {
-        this.theLoai = theLoai;
+    public void setGenre(ArrayList<Genre> genre) {
+        this.genre = genre;
     }
 
-    public ArrayList<ChuDe> getChuDe() {
-        return chuDe;
+    public ArrayList<Category> getCategories() {
+        return categories;
     }
 
-    public void setChuDe(ArrayList<ChuDe> chuDe) {
-        this.chuDe = chuDe;
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
     }
 }

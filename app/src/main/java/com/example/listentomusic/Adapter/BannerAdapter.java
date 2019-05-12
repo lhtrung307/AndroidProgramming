@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.listentomusic.Activity.DanhsachbaihatActivity;
-import com.example.listentomusic.Model.Quangcao;
+import com.example.listentomusic.Activity.SongsActivity;
+import com.example.listentomusic.Model.Banner;
 import com.example.listentomusic.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +19,9 @@ import java.util.ArrayList;
 
 public class BannerAdapter extends PagerAdapter {
     Context context;
-    ArrayList<Quangcao> arrayListbanner;
+    ArrayList<Banner> arrayListbanner;
 
-    public BannerAdapter(Context context, ArrayList<Quangcao> arrayListbanner) {
+    public BannerAdapter(Context context, ArrayList<Banner> arrayListbanner) {
         this.context = context;
         this.arrayListbanner = arrayListbanner;
     }
@@ -56,7 +55,7 @@ public class BannerAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+               Intent intent = new Intent(context, SongsActivity.class);
                intent.putExtra("banner", arrayListbanner.get(position));
                context.startActivity(intent);
 

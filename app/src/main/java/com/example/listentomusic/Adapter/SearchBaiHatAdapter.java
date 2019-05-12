@@ -9,29 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.listentomusic.Activity.PlayNhacActivity;
-import com.example.listentomusic.Model.BaiHat;
+import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
-import com.example.listentomusic.Service.APIService;
-import com.example.listentomusic.Service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<BaiHat> mangbaihat;
+    ArrayList<Song> songs;
 
-    public SearchBaiHatAdapter(Context context, ArrayList<BaiHat> mangbaihat) {
+    public SearchBaiHatAdapter(Context context, ArrayList<Song> songs) {
         this.context = context;
-        this.mangbaihat = mangbaihat;
+        this.songs = songs;
     }
 
     @NonNull
@@ -45,61 +38,42 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        BaiHat baiHat = mangbaihat.get(i);
-        viewHolder.txtTenBaiHat.setText(baiHat.getTenbaihat());
-        viewHolder.txtCaSi.setText(baiHat.getCasi());
-        Picasso.with(context).load(baiHat.getHinhbaihat()).into(viewHolder.imgBaiHat);
+        Song song = songs.get(i);
+        viewHolder.txtTenBaiHat.setText(song.getTenbaihat());
+        viewHolder.txtCaSi.setText(song.getCasi());
+        Picasso.with(context).load(song.getHinhbaihat()).into(viewHolder.imgBaiHat);
     }
 
     @Override
     public int getItemCount() {
-        return mangbaihat.size();
+        return songs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtTenBaiHat, txtCaSi;
-        ImageView imgBaiHat, imgLuotThich;
+        ImageView imgBaiHat, imgLike;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenBaiHat = itemView.findViewById(R.id.textviewsearchtenbaihat);
             txtCaSi = itemView.findViewById(R.id.textviewsearchtencasi);
             imgBaiHat = itemView.findViewById(R.id.imageviewsearchbaihat);
-            imgLuotThich = itemView.findViewById(R.id.imageviewsearchluotthich);
+            imgLike = itemView.findViewById(R.id.imageviewsearchluotthich);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlayNhacActivity.class);
-                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
+                    intent.putExtra("cakhuc", songs.get(getPosition()));
                     context.startActivity(intent);
                 }
             });
-            imgLuotThich.setOnClickListener(new View.OnClickListener() {
+            imgLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgLuotThich.setImageResource(R.drawable.iconloved);
-                    DataService dataService = APIService.getService();
-                    Call<String> callback = dataService.UpdateLuotThich("1", mangbaihat.get(getPosition()).getIdbaihat());
-                    callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String ketqua = response.body();
-                            if (ketqua.equals("Success")){
-                                Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                            } else{
-                                Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-
-                        }
-                    });
-                    imgLuotThich.setEnabled(false);
+                    String songId = songs.get(getPosition()).getIdbaihat();
+                    BaihathotAdapter.likeButtonOnClick(imgLike, songId, context);
                 }
             });
-
         }
     }
 }

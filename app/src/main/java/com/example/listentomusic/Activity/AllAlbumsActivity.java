@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhsachtatcaAlbumActivity extends AppCompatActivity {
+public class AllAlbumsActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewAllAlbum;
     Toolbar toolbaralbum;
@@ -42,8 +42,8 @@ public class DanhsachtatcaAlbumActivity extends AppCompatActivity {
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 ArrayList<Album> mangalbum = (ArrayList<Album>) response.body();
                 Log.d("BBB", "ten album" + mangalbum.get(0).getTenAlbum());
-                allAlbumAdapter = new AllAlbumAdapter(DanhsachtatcaAlbumActivity.this, mangalbum);
-                recyclerViewAllAlbum.setLayoutManager(new GridLayoutManager(DanhsachtatcaAlbumActivity.this, 2));
+                allAlbumAdapter = new AllAlbumAdapter(AllAlbumsActivity.this, mangalbum);
+                recyclerViewAllAlbum.setLayoutManager(new GridLayoutManager(AllAlbumsActivity.this, 2));
                 recyclerViewAllAlbum.setAdapter(allAlbumAdapter);
             }
 

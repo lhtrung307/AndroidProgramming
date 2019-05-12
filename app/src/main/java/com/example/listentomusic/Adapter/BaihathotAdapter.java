@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.listentomusic.Activity.PlayNhacActivity;
-import com.example.listentomusic.Model.BaiHat;
+import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
 import com.example.listentomusic.Service.DataService;
@@ -26,11 +26,11 @@ import retrofit2.Response;
 
 public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.ViewHolder>  {
     Context context;
-    ArrayList<BaiHat> baiHats;
+    ArrayList<Song> songs;
 
-    public BaihathotAdapter(Context context, ArrayList<BaiHat> baiHats) {
+    public BaihathotAdapter(Context context, ArrayList<Song> songs) {
         this.context = context;
-        this.baiHats = baiHats;
+        this.songs = songs;
     }
 
     @NonNull
@@ -43,61 +43,68 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            BaiHat baiHat=baiHats.get(i);
-            viewHolder.txtcasi.setText(baiHat.getCasi());
-            viewHolder.txtten.setText(baiHat.getTenbaihat());
-            Picasso.with(context).load(baiHat.getHinhbaihat()).into(viewHolder.imghinh);
+            Song song = songs.get(i);
+            viewHolder.artistName.setText(song.getCasi());
+            viewHolder.songName.setText(song.getTenbaihat());
+            Picasso.with(context).load(song.getHinhbaihat()).into(viewHolder.songImg);
 
     }
 
     @Override
     public int getItemCount() {
-        return baiHats.size();
+        return songs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtten, txtcasi;
-        ImageView imghinh, imgluotthich;
+        TextView songName, artistName;
+        ImageView songImg, imgLike;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtten = itemView.findViewById(R.id.textviewtenbaihathot);
-            txtcasi = itemView.findViewById(R.id.textviewcasibaihathot);
-            imghinh = itemView.findViewById(R.id.imageviewbaihathot);
-            imgluotthich =itemView.findViewById(R.id.imageviewluotthich);
-itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(context, PlayNhacActivity.class);
-        intent.putExtra("cakhuc", baiHats.get(getPosition()));
-        context.startActivity(intent);
-    }
-});
-            imgluotthich.setOnClickListener(new View.OnClickListener() {
+            songName = itemView.findViewById(R.id.textviewtenbaihathot);
+            artistName = itemView.findViewById(R.id.textviewcasibaihathot);
+            songImg = itemView.findViewById(R.id.imageviewbaihathot);
+            imgLike =itemView.findViewById(R.id.imageviewluotthich);
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgluotthich.setImageResource(R.drawable.iconloved);
-                    DataService dataService = APIService.getService();
-                    Call<String> callback = dataService.UpdateLuotThich("1", baiHats.get(getPosition()).getIdbaihat());
-                    callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String ketqua = response.body();
-                            if (ketqua.equals("Success")){
-                                Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                            } else{
-                                Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-
-                        }
-                    });
-                    imgluotthich.setEnabled(false);
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                    intent.putExtra("cakhuc", songs.get(getPosition()));
+                    context.startActivity(intent);
                 }
             });
+
+            imgLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String songId = songs.get(getPosition()).getIdbaihat();
+                    likeButtonOnClick(imgLike, songId, context);
+                }
+            });
+
         }
+    }
+
+    public static void likeButtonOnClick(ImageView imgLike, String songId, final Context context){
+        imgLike.setImageResource(R.drawable.iconloved);
+        DataService dataService = APIService.getService();
+        Call<String> callback = dataService.UpdateLuotThich("1", songId);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if (ketqua.equals("Success")){
+                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        imgLike.setEnabled(false);
     }
 }

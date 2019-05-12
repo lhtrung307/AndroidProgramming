@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.listentomusic.Model.BaiHat;
+import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
 
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHolder>{
 
     Context context;
-    ArrayList<BaiHat> mangbaihat;
+    ArrayList<Song> mangbaihat;
 
-    public PlaynhacAdapter(Context context, ArrayList<BaiHat> mangbaihat) {
+    public PlaynhacAdapter(Context context, ArrayList<Song> mangbaihat) {
         this.context = context;
         this.mangbaihat = mangbaihat;
     }
@@ -34,9 +34,9 @@ public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        BaiHat baiHat = mangbaihat.get(i);
-        viewHolder.txtcasi.setText(baiHat.getCasi());
-        viewHolder.txttenbaihat.setText(baiHat.getTenbaihat());
+        Song song = mangbaihat.get(i);
+        viewHolder.txtcasi.setText(song.getCasi());
+        viewHolder.txttenbaihat.setText(song.getTenbaihat());
         viewHolder.txtindex.setText(i + 1 + "");
     }
 

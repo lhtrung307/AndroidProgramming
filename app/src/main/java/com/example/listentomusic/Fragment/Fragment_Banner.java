@@ -6,13 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.listentomusic.Adapter.BannerAdapter;
-import com.example.listentomusic.Model.Quangcao;
+import com.example.listentomusic.Model.Banner;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
 import com.example.listentomusic.Service.DataService;
@@ -49,11 +48,11 @@ public class Fragment_Banner extends Fragment {
 
     private void GetData() {
         DataService dataService = APIService.getService();
-        Call<List<Quangcao>> callback = dataService.GetDataBanner();
+        Call<List<Banner>> callback = dataService.GetDataBanner();
         ((retrofit2.Call) callback).enqueue(new Callback() {
             @Override
             public void onResponse(retrofit2.Call call, Response response) {
-                ArrayList<Quangcao> banners = (ArrayList<Quangcao>) response.body();
+                ArrayList<Banner> banners = (ArrayList<Banner>) response.body();
                 bannerAdapter = new BannerAdapter(getActivity(),banners);
                 viewPager.setAdapter(bannerAdapter);
                 circleIndicator.setViewPager(viewPager);

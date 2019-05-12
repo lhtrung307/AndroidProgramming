@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
-import com.example.listentomusic.Adapter.DanhsachcacplaylistAdapter;
+import com.example.listentomusic.Adapter.PlaylistsAdapter;
 import com.example.listentomusic.Model.Playlist;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
@@ -21,10 +20,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhsachcacplaylistActivity extends AppCompatActivity {
+public class AllPlaylistsActivity extends AppCompatActivity {
 Toolbar toolbar;
 RecyclerView recyclerViewdanhsachcacplaylist;
-DanhsachcacplaylistAdapter danhsachcacplaylistAdapter;
+PlaylistsAdapter playlistsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +40,9 @@ DanhsachcacplaylistAdapter danhsachcacplaylistAdapter;
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
                 ArrayList<Playlist> mangplaylist = (ArrayList<Playlist>) response.body();
-                danhsachcacplaylistAdapter = new DanhsachcacplaylistAdapter(DanhsachcacplaylistActivity.this, mangplaylist);
-                recyclerViewdanhsachcacplaylist.setLayoutManager(new GridLayoutManager(DanhsachcacplaylistActivity.this, 2));
-                recyclerViewdanhsachcacplaylist.setAdapter(danhsachcacplaylistAdapter);
+                playlistsAdapter = new PlaylistsAdapter(AllPlaylistsActivity.this, mangplaylist);
+                recyclerViewdanhsachcacplaylist.setLayoutManager(new GridLayoutManager(AllPlaylistsActivity.this, 2));
+                recyclerViewdanhsachcacplaylist.setAdapter(playlistsAdapter);
 
             }
 

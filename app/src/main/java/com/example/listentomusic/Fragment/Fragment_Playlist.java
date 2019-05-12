@@ -16,10 +16,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.listentomusic.Activity.DanhsachbaihatActivity;
-import com.example.listentomusic.Activity.DanhsachcacplaylistActivity;
+import com.example.listentomusic.Activity.SongsActivity;
+import com.example.listentomusic.Activity.AllPlaylistsActivity;
 import com.example.listentomusic.Adapter.PlaylistAdapter;
 import com.example.listentomusic.Model.Playlist;
 import com.example.listentomusic.R;
@@ -49,7 +48,7 @@ public class Fragment_Playlist extends Fragment {
 txtviewxemthemplaylist.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-Intent intent = new Intent(getActivity(), DanhsachcacplaylistActivity.class);
+Intent intent = new Intent(getActivity(), AllPlaylistsActivity.class);
 startActivity(intent);
     }
 });
@@ -74,7 +73,7 @@ startActivity(intent);
                 lvplaylisst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
+                        Intent intent = new Intent(getActivity(), SongsActivity.class);
                         intent.putExtra("itemplaylist", mangplaylist.get(position));
                         startActivity(intent);
                     }

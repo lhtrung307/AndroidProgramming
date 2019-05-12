@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.listentomusic.Activity.PlayNhacActivity;
-import com.example.listentomusic.Model.BaiHat;
+import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
 import com.example.listentomusic.Service.DataService;
@@ -23,11 +23,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAdapter.ViewHolder> {
+public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> {
     Context context;
-    ArrayList<BaiHat> mangbaihat;
+    ArrayList<Song> mangbaihat;
 
-    public DanhsachbaihatAdapter(Context context, ArrayList<BaiHat> mangbaihat) {
+    public SongsAdapter(Context context, ArrayList<Song> mangbaihat) {
         this.context = context;
         this.mangbaihat = mangbaihat;
     }
@@ -42,9 +42,9 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        BaiHat baiHat = mangbaihat.get(i);
-        viewHolder.txtcasi.setText(baiHat.getCasi());
-        viewHolder.txttenbaihat.setText(baiHat.getTenbaihat());
+        Song song = mangbaihat.get(i);
+        viewHolder.txtcasi.setText(song.getCasi());
+        viewHolder.txttenbaihat.setText(song.getTenbaihat());
         viewHolder.txtindex.setText(i+1+"");
 
     }

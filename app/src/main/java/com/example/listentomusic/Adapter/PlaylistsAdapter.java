@@ -15,14 +15,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class DanhsachcacplaylistAdapter extends RecyclerView.Adapter<DanhsachcacplaylistAdapter.ViewHolder> {
+public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.ViewHolder> {
     Context context;
     ArrayList<Playlist> mangplaylist;
 
    //tao constructor nhan alt + insert
 
 
-    public DanhsachcacplaylistAdapter(Context context, ArrayList<Playlist> mangplaylist) {
+    public PlaylistsAdapter(Context context, ArrayList<Playlist> mangplaylist) {
         this.context = context;
         this.mangplaylist = mangplaylist;
     }

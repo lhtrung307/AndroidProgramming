@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/coordinatorlayout"
-    tools:context=".Activity.DanhsachbaihatActivity">
+    tools:context=".Activity.SongsActivity">
 
     <android.support.design.widget.AppBarLayout
 

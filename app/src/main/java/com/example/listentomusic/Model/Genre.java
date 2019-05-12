@@ -5,57 +5,57 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class TheLoai implements Serializable {
+public class Genre implements Serializable {
 
     @SerializedName("idtheloai")
     @Expose
-    private String idtheloai;
+    private String genreId;
     @SerializedName("idchude")
     @Expose
-    private String idchude;
+    private String categoryId;
     @SerializedName("tentheloai")
     @Expose
-    private String tentheloai;
+    private String genreName;
     @SerializedName("hinhtheloai")
     @Expose
-    private String hinhtheloai;
+    private String genreImage;
 
-    public TheLoai(String idTheloai, String idchude, String tenTheloai, String hinhTheloai) {
-        this.idtheloai = idTheloai;
-        this.idchude = idchude;
-        this.tentheloai = tenTheloai;
-        this.hinhtheloai = hinhTheloai;
+    public Genre(String idTheloai, String categoryId, String tenTheloai, String hinhTheloai) {
+        this.genreId = idTheloai;
+        this.categoryId = categoryId;
+        this.genreName = tenTheloai;
+        this.genreImage = hinhTheloai;
     }
 
     public String getIdTheloai() {
-        return idtheloai;
+        return genreId;
     }
 
     public void setIdTheloai(String idTheloai) {
-        this.idtheloai = idTheloai;
+        this.genreId = idTheloai;
     }
 
     public String getIdChuDe() {
-        return idchude;
+        return categoryId;
     }
 
     public void setIdChuDe(String idChuDe) {
-        this.idchude = idChuDe;
+        this.categoryId = idChuDe;
     }
 
     public String getTenTheloai() {
-        return tentheloai;
+        return genreName;
     }
 
     public void setTenTheloai(String tenTheloai) {
-        this.tentheloai = tenTheloai;
+        this.genreName = tenTheloai;
     }
 
     public String getHinhTheloai() {
-        return hinhtheloai;
+        return genreImage;
     }
 
     public void setHinhTheloai(String hinhTheloai) {
-        this.hinhtheloai = hinhTheloai;
+        this.genreImage = hinhTheloai;
     }
 }

@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.listentomusic.Adapter.SearchBaiHatAdapter;
-import com.example.listentomusic.Model.BaiHat;
+import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
 import com.example.listentomusic.Service.DataService;
@@ -76,11 +75,11 @@ public class Fragment_Tim_Kiem extends Fragment {
 
     private void SearchTuKhoaBaiHat (String query){
         DataService dataService = APIService.getService();
-        Call<List<BaiHat>> callback = dataService.GetSearchBaiHat(query);
-        callback.enqueue(new Callback<List<BaiHat>>() {
+        Call<List<Song>> callback = dataService.GetSearchBaiHat(query);
+        callback.enqueue(new Callback<List<Song>>() {
             @Override
-            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
-                ArrayList<BaiHat> mangbaihat = (ArrayList<BaiHat>) response.body();
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                ArrayList<Song> mangbaihat = (ArrayList<Song>) response.body();
                 if(mangbaihat.size() > 0){
                     searchBaiHatAdapter = new SearchBaiHatAdapter(getActivity(), mangbaihat);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -95,7 +94,7 @@ public class Fragment_Tim_Kiem extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+            public void onFailure(Call<List<Song>> call, Throwable t) {
 
             }
         });

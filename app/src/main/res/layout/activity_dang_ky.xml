@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+        <TextView
+            android:gravity="center"
+            android:textSize="30dp"
+            android:text="ĐĂNG KÝ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_margin="15dp"
+            android:hint="Input Username"
+            android:id="@+id/edittextuser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Input Password"
+            android:inputType="textPassword"
+            android:layout_margin="15dp"
+            android:id="@+id/edittextpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Login Button -->
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="#ea4c88"
+            android:text="Đăng ký"
+            android:textColor="#fff" />
+
+        <!-- Link to Login Screen -->
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:background="#2173B3"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</LinearLayout>
