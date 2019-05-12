@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.listentomusic.Model.BaiHat;
 import com.example.listentomusic.R;
@@ -56,7 +57,12 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
             txtcasi = itemView.findViewById(R.id.textviewcasibaihathot);
             imghinh = itemView.findViewById(R.id.imageviewbaihathot);
             imgluotthich =itemView.findViewById(R.id.imageviewluotthich);
-
+    imgluotthich.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(context, baiHats.get(getPosition()).getTenbaihat(), Toast.LENGTH_SHORT).show();
+        }
+    });
         }
     }
 }

@@ -67,8 +67,8 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlayNhacActivity.class);
-                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
-                    context.startActivity(intent);
+//                    intent.putExtra("cakhuc", mangbaihat.get(getPosition()));
+//                    context.startActivity(intent);
                 }
             });
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
