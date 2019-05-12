@@ -37,7 +37,7 @@ public class AllAlbumAdapter extends  RecyclerView.Adapter<AllAlbumAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-Album album = albumArrayList.get(position);
+        Album album = albumArrayList.get(position);
         Picasso.with(context).load(album.getHinhAlbum()).into(holder.imgallalbum);
         holder.txttenallalbum.setText(album.getTenAlbum());
     }
@@ -48,20 +48,20 @@ Album album = albumArrayList.get(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-ImageView imgallalbum;
-TextView txttenallalbum;
-    public ViewHolder(@NonNull View itemView) {
-        super(itemView);
-        imgallalbum = itemView.findViewById(R.id.imageviewallalbum);
-        txttenallalbum = itemView.findViewById(R.id.textviewtenalbum);
-itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-      intent.putExtra("album", albumArrayList.get(getPosition()));
-context.startActivity(intent);
+        ImageView imgallalbum;
+        TextView txttenallalbum;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imgallalbum = itemView.findViewById(R.id.imageviewallalbum);
+            txttenallalbum = itemView.findViewById(R.id.textviewtenallalbum);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                    intent.putExtra("album", albumArrayList.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
-});
-    }
-}
 }
