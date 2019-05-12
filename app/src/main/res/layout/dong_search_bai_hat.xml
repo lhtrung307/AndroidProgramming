@@ -37,4 +37,12 @@
         android:textSize="18sp"
         android:layout_toRightOf="@+id/imageviewsearchbaihat"
         android:layout_below="@id/textviewsearchtenbaihat"/>
+    <ImageView
+        android:src="@drawable/iconlove"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/imageviewsearchluotthich"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 </RelativeLayout>
