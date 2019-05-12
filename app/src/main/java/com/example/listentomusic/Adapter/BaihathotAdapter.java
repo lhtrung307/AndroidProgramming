@@ -63,6 +63,12 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
 //            Toast.makeText(context, baiHats.get(getPosition()).getTenbaihat(), Toast.LENGTH_SHORT).show();
         }
     });
+    itemView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    });
         }
     }
 }
