@@ -2,14 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/loiBaiHat"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:scrollbars="vertical"
-        android:gravity="bottom"
-        android:textAlignment="center"/>
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:text="Hiện không có lời bài hát"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
 </LinearLayout>

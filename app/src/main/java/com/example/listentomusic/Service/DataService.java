@@ -76,4 +76,8 @@ public interface DataService {
     @FormUrlEncoded
     @POST("insertusers.php")
     Call<String> Insert(@Field("username") String username,@Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("loibaihat.php")
+    Call<String> GetLoiBaiHat(@Field("idBaiHat") String idBaiHat);
 }

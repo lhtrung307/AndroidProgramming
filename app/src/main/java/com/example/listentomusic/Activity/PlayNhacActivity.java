@@ -45,6 +45,14 @@ public class PlayNhacActivity extends AppCompatActivity {
     boolean repeat = false;
     boolean checkrandom = false;
     boolean next = false;
+    boolean prev = false;
+
+    public PlayNhacActivity() {
+        fragment_dia_nhac = new Fragment_Dia_Nhac();
+        fragment_play_danh_sach_cac_bai_hat = new Fragment_Play_Danh_Sach_Cac_Bai_Hat();
+        fragment_loi_bai_hat = new Fragment_Loi_Bai_Hat();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +85,10 @@ public class PlayNhacActivity extends AppCompatActivity {
                 if (mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
                     imgplay.setImageResource(R.drawable.iconplay);
+                    fragment_dia_nhac.StopNhac();
                 } else {
                     mediaPlayer.start();
+                    fragment_dia_nhac.Playnhac(songs.get(position).getHinhbaihat());
                     imgplay.setImageResource(R.drawable.iconpause);
                 }
             }
@@ -139,25 +149,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                 if (songs.size() > 0) {
                     clearMediaPlayer();
                     next = true;
-//                    if(position < songs.size()){
-//                        imgplay.setImageResource(R.drawable.iconpause);
-//                        position++;
-//                        if (repeat){
-//                            if (position == 0){
-//                                position = songs.size();
-//                            }
-//                            position -= 1;
-//                        }
-//                        if (checkrandom) {
-//                            getRandomSongIndex();
-//                        }
-//                        if (position > (songs.size() - 1)){
-//                            position = 0;
-//                        }
-
-//                        new PlayMp3().execute(songs.get(position).getLinkbaihat());
-//                        renderSongInfoToUI();
-//                    }
                 }
             }
         });
@@ -166,25 +157,8 @@ public class PlayNhacActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (songs.size() > 0) {
                     clearMediaPlayer();
-                    if (position < songs.size()) {
-                        imgplay.setImageResource(R.drawable.iconpause);
-                        position--;
-
-                        if (position < 0) {
-                            position = songs.size() - 1;
-                        }
-
-                        if (repeat) {
-                            position += 1;
-                        }
-                        if (checkrandom) {
-                            getRandomSongIndex();
-                        }
-                        new PlayMp3().execute(songs.get(position).getLinkbaihat());
-                        renderSongInfoToUI();
-                    }
+                    prev = true;
                 }
-                disableChangeSongIn(5000);
             }
         });
     }
@@ -260,10 +234,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                 songs.clear();
             }
         });
-        toolbarplaynhac.setTitleTextColor(Color.WHITE);
-        fragment_dia_nhac = new Fragment_Dia_Nhac();
-        fragment_play_danh_sach_cac_bai_hat = new Fragment_Play_Danh_Sach_Cac_Bai_Hat();
-        fragment_loi_bai_hat = new Fragment_Loi_Bai_Hat();
         adapternhac = new ViewPagerPlaylistnhac(getSupportFragmentManager());
         adapternhac.AddFragment(fragment_play_danh_sach_cac_bai_hat);
         adapternhac.AddFragment(fragment_dia_nhac);
@@ -296,12 +266,12 @@ public class PlayNhacActivity extends AppCompatActivity {
                         mediaPlayer.stop();
                         mediaPlayer.reset();
                         next = true;
-                        try {
-                            Thread.sleep(1000);
-                        }
-                        catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            Thread.sleep(1000);
+//                        }
+//                        catch (InterruptedException e){
+//                            e.printStackTrace();
+//                        }
                     }
                 });
                 mediaPlayer.setDataSource(baihat);
@@ -349,18 +319,43 @@ public class PlayNhacActivity extends AppCompatActivity {
 
                         if (repeat) {
                             position += 1;
+                            if(position == songs.size()){
+                                position = 0;
+                            }
+
                         }
                         if (checkrandom) {
                             getRandomSongIndex();
                         }
                         new PlayMp3().execute(songs.get(position).getLinkbaihat());
-                        fragment_dia_nhac.Playnhac(songs.get(position).getHinhbaihat());
-                        getSupportActionBar().setTitle(songs.get(position).getTenbaihat());
+                        renderSongInfoToUI();
                     }
-                disableChangeSongIn(5000);
-                next = false;
-                handler1.removeCallbacks(this);
-                } else {
+                    disableChangeSongIn(5000);
+                    next = false;
+                    handler1.removeCallbacks(this);
+                } else if (prev){
+                    if (position < songs.size()) {
+                        imgplay.setImageResource(R.drawable.iconpause);
+                        position--;
+                        if(position == -1){
+                            if(repeat){
+                                position = songs.size() - 1;
+                            } else {
+                                position = 0;
+                            }
+                        }
+
+                        if (checkrandom) {
+                            getRandomSongIndex();
+                        }
+                        new PlayMp3().execute(songs.get(position).getLinkbaihat());
+                        renderSongInfoToUI();
+                    }
+                    disableChangeSongIn(5000);
+                    prev = false;
+                    handler1.removeCallbacks(this);
+                }
+                else {
                     handler1.postDelayed(this, 1000);
                 }
             }

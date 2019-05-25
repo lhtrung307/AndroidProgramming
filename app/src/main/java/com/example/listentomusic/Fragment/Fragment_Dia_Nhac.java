@@ -41,4 +41,8 @@ public class Fragment_Dia_Nhac extends Fragment {
         Picasso.with(getActivity()).load(hinhanh).into(circleImageView);
         objectAnimator.start();
     }
+
+    public void StopNhac(){
+        objectAnimator.end();
+    }
 }
