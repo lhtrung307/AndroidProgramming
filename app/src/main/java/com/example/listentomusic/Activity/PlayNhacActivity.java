@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.listentomusic.Adapter.ViewPagerPlaylistnhac;
 import com.example.listentomusic.Fragment.Fragment_Dia_Nhac;
+import com.example.listentomusic.Fragment.Fragment_Loi_Bai_Hat;
 import com.example.listentomusic.Fragment.Fragment_Play_Danh_Sach_Cac_Bai_Hat;
 import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
@@ -39,6 +40,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     public static ViewPagerPlaylistnhac adapternhac;
     Fragment_Dia_Nhac fragment_dia_nhac;
     Fragment_Play_Danh_Sach_Cac_Bai_Hat fragment_play_danh_sach_cac_bai_hat;
+    Fragment_Loi_Bai_Hat fragment_loi_bai_hat;
     MediaPlayer mediaPlayer;
     int position = 0;
     boolean repeat = false;
@@ -57,7 +59,6 @@ public class PlayNhacActivity extends AppCompatActivity {
 
     private void eventClick() {
         final Handler handler = new Handler();
-        Log.d("BBBB", "eventClick: play nhac");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -242,7 +243,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                 PlayNhacActivity.songs = songs;
             }
         }
-
     }
 
     private void init() {
@@ -269,9 +269,11 @@ public class PlayNhacActivity extends AppCompatActivity {
         toolbarplaynhac.setTitleTextColor(Color.WHITE);
         fragment_dia_nhac = new Fragment_Dia_Nhac();
         fragment_play_danh_sach_cac_bai_hat = new Fragment_Play_Danh_Sach_Cac_Bai_Hat();
+        fragment_loi_bai_hat = new Fragment_Loi_Bai_Hat();
         adapternhac = new ViewPagerPlaylistnhac(getSupportFragmentManager());
         adapternhac.AddFragment(fragment_play_danh_sach_cac_bai_hat);
         adapternhac.AddFragment(fragment_dia_nhac);
+        adapternhac.AddFragment(fragment_loi_bai_hat);
         viewPagerplaynhac.setAdapter(adapternhac);
         fragment_dia_nhac = (Fragment_Dia_Nhac) adapternhac.getItem(1);
         if(songs.size() > 0){
