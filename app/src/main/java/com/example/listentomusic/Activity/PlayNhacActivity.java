@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -138,59 +137,35 @@ public class PlayNhacActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (songs.size() > 0) {
-                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
-                    if(position < songs.size()){
-                        imgplay.setImageResource(R.drawable.iconpause);
-                        position++;
-                        if (repeat){
-                            if (position == 0){
-                                position = songs.size();
-                            }
-                            position -= 1;
-                        }
-                        if (checkrandom){
-                            Random random = new Random();
-                            int index = random.nextInt(songs.size());
-                            if (index == position){
-                                position = index - 1;
-                            }
-                            position = index;
-                        }
-                        if (position > (songs.size() - 1)){
-                            position = 0;
-                        }
-                        new PlayMp3().execute(songs.get(position).getLinkbaihat());
-                        fragment_dia_nhac.Playnhac(songs.get(position).getHinhbaihat());
-                        getSupportActionBar().setTitle(songs.get(position).getTenbaihat());
-                        UpdateTime();
-                    }
-                }
-                imgpre.setClickable(false);
-                imgnext.setClickable(false);
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgpre.setClickable(true);
-                        imgnext.setClickable(true);
-                    }
-                }, 5000);
+                    clearMediaPlayer();
+                    next = true;
+//                    if(position < songs.size()){
+//                        imgplay.setImageResource(R.drawable.iconpause);
+//                        position++;
+//                        if (repeat){
+//                            if (position == 0){
+//                                position = songs.size();
+//                            }
+//                            position -= 1;
+//                        }
+//                        if (checkrandom) {
+//                            getRandomSongIndex();
+//                        }
+//                        if (position > (songs.size() - 1)){
+//                            position = 0;
+//                        }
 
+//                        new PlayMp3().execute(songs.get(position).getLinkbaihat());
+//                        renderSongInfoToUI();
+//                    }
+                }
             }
         });
         imgpre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (songs.size() > 0) {
-                    if (mediaPlayer.isPlaying() || mediaPlayer != null) {
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
+                    clearMediaPlayer();
                     if (position < songs.size()) {
                         imgplay.setImageResource(R.drawable.iconpause);
                         position--;
@@ -203,31 +178,50 @@ public class PlayNhacActivity extends AppCompatActivity {
                             position += 1;
                         }
                         if (checkrandom) {
-                            Random random = new Random();
-                            int index = random.nextInt(songs.size());
-                            if (index == position) {
-                                position = index - 1;
-                            }
-                            position = index;
+                            getRandomSongIndex();
                         }
                         new PlayMp3().execute(songs.get(position).getLinkbaihat());
-                        fragment_dia_nhac.Playnhac(songs.get(position).getHinhbaihat());
-                        getSupportActionBar().setTitle(songs.get(position).getTenbaihat());
-                        UpdateTime();
+                        renderSongInfoToUI();
                     }
                 }
-                imgpre.setClickable(false);
-                imgnext.setClickable(false);
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgpre.setClickable(true);
-                        imgnext.setClickable(true);
-                    }
-                }, 5000);
+                disableChangeSongIn(5000);
             }
         });
+    }
+
+    private void renderSongInfoToUI(){
+        fragment_dia_nhac.Playnhac(songs.get(position).getHinhbaihat());
+        getSupportActionBar().setTitle(songs.get(position).getTenbaihat());
+    }
+
+    private void disableChangeSongIn(int milisecs){
+        imgpre.setClickable(false);
+        imgnext.setClickable(false);
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imgpre.setClickable(true);
+                imgnext.setClickable(true);
+            }
+        }, milisecs);
+    }
+
+    private void getRandomSongIndex(){
+        Random random = new Random();
+        int index = random.nextInt(songs.size());
+        if (index == position) {
+            position = index - 1;
+        }
+        position = index;
+    }
+
+    private void clearMediaPlayer(){
+        if (mediaPlayer.isPlaying() || mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     private void GetDataFromIntent() {
@@ -301,6 +295,13 @@ public class PlayNhacActivity extends AppCompatActivity {
                     public void onCompletion(MediaPlayer mp) {
                         mediaPlayer.stop();
                         mediaPlayer.reset();
+                        next = true;
+                        try {
+                            Thread.sleep(1000);
+                        }
+                        catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
                     }
                 });
                 mediaPlayer.setDataSource(baihat);
@@ -330,18 +331,6 @@ public class PlayNhacActivity extends AppCompatActivity {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
                     txtTimesong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
                     handler.postDelayed(this, 300);
-                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            next = true;
-                            try {
-                                Thread.sleep(1000);
-                            }
-                            catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                        }
-                    });
                 }
             }
         }, 300);
@@ -362,27 +351,13 @@ public class PlayNhacActivity extends AppCompatActivity {
                             position += 1;
                         }
                         if (checkrandom) {
-                            Random random = new Random();
-                            int index = random.nextInt(songs.size());
-                            if (index == position) {
-                                position = index - 1;
-                            }
-                            position = index;
+                            getRandomSongIndex();
                         }
                         new PlayMp3().execute(songs.get(position).getLinkbaihat());
                         fragment_dia_nhac.Playnhac(songs.get(position).getHinhbaihat());
                         getSupportActionBar().setTitle(songs.get(position).getTenbaihat());
                     }
-                imgpre.setClickable(false);
-                imgnext.setClickable(false);
-                Handler handler2 = new Handler();
-                handler2.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgpre.setClickable(true);
-                        imgnext.setClickable(true);
-                    }
-                }, 5000);
+                disableChangeSongIn(5000);
                 next = false;
                 handler1.removeCallbacks(this);
                 } else {
