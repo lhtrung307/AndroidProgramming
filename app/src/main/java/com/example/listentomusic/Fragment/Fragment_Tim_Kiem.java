@@ -41,10 +41,12 @@ public class Fragment_Tim_Kiem extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_tim_kiem, container, false);
         toolbar = view.findViewById(R.id.toolbarsearchbaihat);
         recyclerViewsearchbaihat = view.findViewById(R.id.recyclerviewsearchbaihat);
         txtkhongcodulieu = view.findViewById(R.id.textviewkhongcodulieu);
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
         setHasOptionsMenu(true);
@@ -53,6 +55,8 @@ public class Fragment_Tim_Kiem extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        txtkhongcodulieu.setVisibility(View.GONE);
+        recyclerViewsearchbaihat.setVisibility(View.GONE);
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.search_view, menu);
         MenuItem menuItem = menu.findItem(R.id.menu_search);
