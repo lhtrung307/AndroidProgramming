@@ -45,10 +45,11 @@ public class DanhsachtheloaitheochudeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Genre>> call, Response<List<Genre>> response) {
                 ArrayList<Genre> genres = (ArrayList<Genre>) response.body();
-                Log.d("bbbbb", genres.get(0).getIdTheloai());
-                danhsachtheloaitheochudeAdapter = new DanhsachtheloaitheochudeAdapter(DanhsachtheloaitheochudeActivity.this, genres);
-                recyclerViewtheloaitheochude.setLayoutManager(new GridLayoutManager(DanhsachtheloaitheochudeActivity.this, 2));
-                recyclerViewtheloaitheochude.setAdapter(danhsachtheloaitheochudeAdapter);
+                if(genres.size() > 0) {
+                    danhsachtheloaitheochudeAdapter = new DanhsachtheloaitheochudeAdapter(DanhsachtheloaitheochudeActivity.this, genres);
+                    recyclerViewtheloaitheochude.setLayoutManager(new GridLayoutManager(DanhsachtheloaitheochudeActivity.this, 2));
+                    recyclerViewtheloaitheochude.setAdapter(danhsachtheloaitheochudeAdapter);
+                }
             }
 
             @Override

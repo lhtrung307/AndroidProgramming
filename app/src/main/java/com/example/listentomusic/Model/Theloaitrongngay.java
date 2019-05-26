@@ -9,17 +9,17 @@ public class Theloaitrongngay {
 
     @SerializedName("TheLoai")
     @Expose
-    private ArrayList<Genre> genre = null;
+    private ArrayList<Genre> genres = null;
     @SerializedName("ChuDe")
     @Expose
     private ArrayList<Category> categories = null;
 
     public ArrayList<Genre> getGenre() {
-        return genre;
+        return genres;
     }
 
-    public void setGenre(ArrayList<Genre> genre) {
-        this.genre = genre;
+    public void setGenre(ArrayList<Genre> genres) {
+        this.genres = genres;
     }
 
     public ArrayList<Category> getCategories() {

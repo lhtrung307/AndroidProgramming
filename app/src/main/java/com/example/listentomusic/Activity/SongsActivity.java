@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.listentomusic.Adapter.BaihathotAdapter;
 import com.example.listentomusic.Adapter.SongsAdapter;
 import com.example.listentomusic.Model.Album;
 import com.example.listentomusic.Model.Genre;
@@ -48,7 +49,7 @@ public class SongsActivity extends AppCompatActivity {
     ImageView imageView;
     Banner banner;
     ArrayList<Song> songs;
-    SongsAdapter songsAdapter;
+    BaihathotAdapter songsAdapter;
     Playlist playlist;
     Genre genre;
     Album album;
@@ -86,7 +87,7 @@ public class SongsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
                 songs = (ArrayList<Song>) response.body();
-                songsAdapter = new SongsAdapter(SongsActivity.this, songs);
+                songsAdapter = new BaihathotAdapter(SongsActivity.this, songs);
                 recyclerViewSongs.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
                 recyclerViewSongs.setAdapter(songsAdapter);
                 eventClick();
@@ -106,7 +107,7 @@ public class SongsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
                 songs = (ArrayList<Song>) response.body();
-                songsAdapter = new SongsAdapter(SongsActivity.this, songs);
+                songsAdapter = new BaihathotAdapter(SongsActivity.this, songs);
                 recyclerViewSongs.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
                 recyclerViewSongs.setAdapter(songsAdapter);
                 eventClick();
@@ -126,7 +127,7 @@ public class SongsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
                 songs = (ArrayList<Song>) response.body();
-                songsAdapter = new SongsAdapter(SongsActivity.this, songs);
+                songsAdapter = new BaihathotAdapter(SongsActivity.this, songs);
                 recyclerViewSongs.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
                 recyclerViewSongs.setAdapter(songsAdapter);
                 eventClick();
@@ -146,7 +147,7 @@ public class SongsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
                  songs = (ArrayList<Song>) response.body();
-                songsAdapter = new SongsAdapter(SongsActivity.this, songs);
+                songsAdapter = new BaihathotAdapter(SongsActivity.this, songs);
                 recyclerViewSongs.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
                 recyclerViewSongs.setAdapter(songsAdapter);
                 eventClick();

@@ -21,6 +21,7 @@ import com.example.listentomusic.Service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,6 +68,29 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
             artistName = itemView.findViewById(R.id.textviewcasibaihathot);
             songImg = itemView.findViewById(R.id.imageviewbaihathot);
             imgLike =itemView.findViewById(R.id.imageviewluotthich);
+            DataService dataService = APIService.getService();
+            Call<List<Song>> callback = dataService.GetListSongLikedByUser(MainActivity.username);
+            callback.enqueue(new Callback<List<Song>>() {
+                @Override
+                public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                    ArrayList<Song> likedSong = (ArrayList<Song>) response.body();
+
+                    for(Song song: likedSong){
+                        Log.d("BBB", "onResponse: " + song.getTenbaihat() + " " + songs.get(getPosition()).getTenbaihat());
+                        if(song.getIdbaihat().equals(songs.get(getPosition()).getIdbaihat())){
+                            imgLike.setImageResource(R.drawable.iconloved);
+                            imgLike.setEnabled(false);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Song>> call, Throwable t) {
+
+                }
+            });
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

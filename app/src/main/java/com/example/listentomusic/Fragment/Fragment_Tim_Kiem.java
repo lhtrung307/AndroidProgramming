@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.listentomusic.Adapter.BaihathotAdapter;
 import com.example.listentomusic.Adapter.SearchBaiHatAdapter;
 import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
@@ -37,7 +38,7 @@ public class Fragment_Tim_Kiem extends Fragment {
     Toolbar toolbar;
     RecyclerView recyclerViewsearchbaihat;
     TextView txtkhongcodulieu;
-    SearchBaiHatAdapter searchBaiHatAdapter;
+    BaihathotAdapter searchBaiHatAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class Fragment_Tim_Kiem extends Fragment {
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
                 ArrayList<Song> mangbaihat = (ArrayList<Song>) response.body();
                 if(mangbaihat.size() > 0){
-                    searchBaiHatAdapter = new SearchBaiHatAdapter(getActivity(), mangbaihat);
+                    searchBaiHatAdapter = new BaihathotAdapter(getActivity(), mangbaihat);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerViewsearchbaihat.setLayoutManager(linearLayoutManager);
                     recyclerViewsearchbaihat.setAdapter(searchBaiHatAdapter);

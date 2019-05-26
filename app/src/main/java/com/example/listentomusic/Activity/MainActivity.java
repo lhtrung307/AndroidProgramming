@@ -31,17 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        mainViewPagerAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chủ");
+        mainViewPagerAdapter.addFragment(new Fragment_Tim_Kiem(), "Tim kiếm");
         mainViewPagerAdapter.addFragment(new Fragment_Ca_Nhan(), "Cá nhân");
-        mainViewPagerAdapter.addFragment(new Fragment_Trang_Chu(),"Trang chủ");
-        mainViewPagerAdapter.addFragment(new Fragment_Tim_Kiem(),"Tìm kiếm");
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.iconavatar);
-        tabLayout.getTabAt(1).setIcon(R.drawable.icontrangchu);
-        tabLayout.getTabAt(2).setIcon(R.drawable.icontimkiem);
-        tabLayout.getTabAt(1).select();
-
-
+        tabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
+        tabLayout.getTabAt(1).setIcon(R.drawable.icontimkiem);
+        tabLayout.getTabAt(2).setIcon(R.drawable.iconavatar);
     }
 
     private void anhXa(){
