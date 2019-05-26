@@ -11,19 +11,19 @@
     <TextView
         android:gravity="center"
         android:textSize="30dp"
-        android:text="LOGIN"
+        android:text="Đăng nhập"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:layout_marginTop="20dp"
         android:layout_margin="15dp"
-        android:hint="Input Username"
+        android:hint=" Tên người dùng"
         android:id="@+id/edittextuserlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:layout_marginTop="20dp"
-        android:hint="Input Password"
+        android:hint=" Mật khẩu"
         android:inputType="textPassword"
         android:layout_margin="15dp"
         android:id="@+id/edittextpasswordlogin"
@@ -33,16 +33,18 @@
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <Button
             android:id="@+id/buttondangnhap"
             android:text="ĐĂNG NHẬP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
     <TextView
+        android:layout_marginTop="15dp"
         android:id="@+id/txtdangky"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"

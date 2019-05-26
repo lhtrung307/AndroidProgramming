@@ -42,7 +42,6 @@ public class Fragment_Banner extends Fragment {
     }
 
     private void anhXa() {
-        viewPager = view.findViewById(R.id.viewpager);
         circleIndicator = view.findViewById(R.id.indicatordefault);
     }
 
@@ -54,6 +53,7 @@ public class Fragment_Banner extends Fragment {
             public void onResponse(retrofit2.Call call, Response response) {
                 ArrayList<Banner> banners = (ArrayList<Banner>) response.body();
                 bannerAdapter = new BannerAdapter(getActivity(),banners);
+                viewPager = view.findViewById(R.id.viewpager);
                 viewPager.setAdapter(bannerAdapter);
                 circleIndicator.setViewPager(viewPager);
                 handler = new Handler();
@@ -64,7 +64,6 @@ public class Fragment_Banner extends Fragment {
                         currentItem++;
                         if(currentItem >= viewPager.getAdapter().getCount()){
                             currentItem = 0;
-
                         }
                         viewPager.setCurrentItem(currentItem, true);
                         handler.postDelayed(runnable, 4500);

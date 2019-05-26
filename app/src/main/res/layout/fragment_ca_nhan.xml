@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100px"
-        android:text="Vui lòng đăng nhập tài khoản để  hiển thị thông tin"
+        android:text="Vui lòng đăng nhập vào tài khoản"
         android:textColor="#000"
-        android:textSize="17sp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnDangNhap"
@@ -27,6 +27,7 @@
         android:id="@+id/ln_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <LinearLayout
@@ -59,7 +60,6 @@
                 android:layout_height="250dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
                 <ImageView
                     android:layout_width="168dp"
                     android:layout_height="150dp"
@@ -74,6 +74,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/baiHatYeuThich"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </LinearLayout>
