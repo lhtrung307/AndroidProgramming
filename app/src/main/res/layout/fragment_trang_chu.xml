@@ -46,6 +46,13 @@
             android:layout_height="wrap_content">
 
         </fragment>
+        <fragment
+            android:name="com.example.listentomusic.Fragment.Fragment_Local"
+            android:id="@+id/fragmentlocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </fragment>
     </LinearLayout>
 
 </ScrollView>
