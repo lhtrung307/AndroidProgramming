@@ -44,14 +44,15 @@ public class LoginActivity extends AppCompatActivity {
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        String ketqua=response.body();
-                        if(ketqua.equals("Success")){
-                            Toast.makeText(getBaseContext(),"Bạn đã đăng nhập thành công",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
+                        String ketqua =response.body();
+                        if(ketqua.equals("Fail")){
+                            Toast.makeText(getBaseContext(),"Tài khoản hoặc mật khẩu không chính xác",Toast.LENGTH_LONG).show();
                         }
                         else{
-                            Toast.makeText(getBaseContext(),"Tài khoản hoặc mật khẩu không chính xác",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(),"Bạn đã đăng nhập thành công",Toast.LENGTH_LONG).show();
+                            MainActivity.username = ketqua;
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }
 
                     }

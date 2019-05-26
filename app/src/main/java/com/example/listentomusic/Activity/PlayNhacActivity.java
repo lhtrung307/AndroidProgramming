@@ -1,7 +1,6 @@
 package com.example.listentomusic.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -11,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -283,6 +283,16 @@ public class PlayNhacActivity extends AppCompatActivity {
             TimeSong();
             UpdateTime();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void TimeSong() {

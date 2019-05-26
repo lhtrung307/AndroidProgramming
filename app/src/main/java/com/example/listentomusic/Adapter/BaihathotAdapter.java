@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.listentomusic.Activity.MainActivity;
 import com.example.listentomusic.Activity.PlayNhacActivity;
 import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
@@ -85,7 +87,7 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
         }
     }
 
-    public static void likeButtonOnClick(ImageView imgLike, String songId, final Context context){
+    public static void likeButtonOnClick(ImageView imgLike, final String songId, final Context context){
         imgLike.setImageResource(R.drawable.iconloved);
         DataService dataService = APIService.getService();
         Call<String> callback = dataService.UpdateLuotThich("1", songId);
@@ -105,6 +107,24 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
 
             }
         });
+        if( MainActivity.username != null){
+            Call<String> callback1 = dataService.UserLikeBaiHat(MainActivity.username, songId);
+            callback1.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if(response.body().equals("Success")){
+                        Toast.makeText(context, "Đã thêm vào bài hát yêu thích của bạn", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(context, "Thêm vào bài hát yêu thích không thành công", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
+        }
         imgLike.setEnabled(false);
     }
 }

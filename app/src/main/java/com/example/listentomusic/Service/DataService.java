@@ -80,4 +80,8 @@ public interface DataService {
     @FormUrlEncoded
     @POST("loibaihat.php")
     Call<String> GetLoiBaiHat(@Field("idBaiHat") String idBaiHat);
+
+    @FormUrlEncoded
+    @POST("insertuserlikebaihat.php")
+    Call<String> UserLikeBaiHat(@Field("username") String username, @Field("idBaiHat") String idBaiHat);
 }
