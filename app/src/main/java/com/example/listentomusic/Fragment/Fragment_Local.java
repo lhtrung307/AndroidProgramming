@@ -56,12 +56,14 @@ public class Fragment_Local extends Fragment {
     }
     private void upDatePlaylist(){
         int i=0;
+        String[] getNameMusic=null;
         if(MEDIA_PATH != null){
             File home = new File(MEDIA_PATH);
             if(home.listFiles(new Mp3Fielter()).length > 0){
                 for(File file: home.listFiles(new Mp3Fielter())){
                     listSongdemo.add(file.getName());
-                    songLocals.add(new Song("",file.getName(),"https://static-zmp3.zadn.vn/skins/common/logo600.png","",MEDIA_PATH+""+file.getName(),""));
+                    getNameMusic=listSongdemo.get(i).split("_");
+                    songLocals.add(new Song("",getNameMusic[0],"https://static-zmp3.zadn.vn/skins/common/logo600.png","",MEDIA_PATH+""+file.getName(),""));
                     System.out.println("list file doc tu android ne: "+listSongdemo.get(i++));
                 }
             }
