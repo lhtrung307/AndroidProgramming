@@ -30,7 +30,6 @@ import retrofit2.Response;
 public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.ViewHolder>  {
     Context context;
     ArrayList<Song> songs;
-    static boolean flag = false;
 
     public BaihathotAdapter(Context context, ArrayList<Song> songs) {
         this.context = context;
@@ -113,9 +112,8 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
         }
     }
 
-    public static void likeButtonOnClick(final ImageView imgLike, final String songId, final Context context){
+    public void likeButtonOnClick(final ImageView imgLike, final String songId, final Context context){
         if(MainActivity.username != null){
-            Log.d("DDD", MainActivity.username);
             imgLike.setImageResource(R.drawable.iconloved);
             final DataService dataService = APIService.getService();
             Call<List<Song>> getLikedSongs = dataService.GetListSongLikedByUser(MainActivity.username);
@@ -123,48 +121,15 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                 @Override
                 public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
                     ArrayList<Song> likedSongs = (ArrayList<Song>) response.body();
-
+                    boolean flag = false;
                     for(Song song: likedSongs){
                         if(song.getIdbaihat().equals(songId)){
-                            Call<String> deleteLuotThichUser = dataService.DeleteUserLikeBaiHat(MainActivity.username, songId);
-                            deleteLuotThichUser.enqueue(new Callback<String>() {
-                                @Override
-                                public void onResponse(Call<String> call, Response<String> response) {
-                                    flag = false;
-                                    if(response.body().equals("Success")){
-                                        Toast.makeText(context,"Đã hủy yêu thích", Toast.LENGTH_SHORT).show();
-                                        imgLike.setImageResource(R.drawable.iconlove);
-                                        flag = true;
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<String> call, Throwable t) {
-
-                                }
-                            });
-
+                            flag = true;
                             break;
                         }
                     }
                     if (!flag){
-                        Call<String> callback = dataService.UpdateLuotThich("1", songId);
-                        callback.enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
-                                String ketqua = response.body();
-                                if (ketqua.equals("Success")){
-                                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                                } else{
-                                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<String> call, Throwable t) {
-
-                            }
-                        });
+                        UpdateTongLuotThich(songId);
                         Call<String> callback1 = dataService.UserLikeBaiHat(MainActivity.username, songId);
                         callback1.enqueue(new Callback<String>() {
                             @Override
@@ -173,6 +138,24 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                                     Toast.makeText(context, "Đã thêm vào bài hát yêu thích của bạn", Toast.LENGTH_SHORT).show();
                                 } else{
                                     Toast.makeText(context, "Thêm vào bài hát yêu thích không thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+                    } else {
+                        Call<String> deleteLuotThichUser = dataService.DeleteUserLikeBaiHat(MainActivity.username, songId);
+                        deleteLuotThichUser.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if(response.body().equals("Success")){
+                                    Toast.makeText(context,"Đã hủy yêu thích", Toast.LENGTH_SHORT).show();
+                                    imgLike.setImageResource(R.drawable.iconlove);
+                                } else {
+                                    Toast.makeText(context,"Lỗi khi hủy yêu thích", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -190,5 +173,26 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                 }
             });
         }
+    }
+
+    private void UpdateTongLuotThich(String songId){
+        DataService dataService = APIService.getService();
+        Call<String> callback = dataService.UpdateLuotThich("1", songId);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if (ketqua.equals("Success")){
+                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }

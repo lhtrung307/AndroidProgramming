@@ -71,7 +71,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                 @Override
                 public void onClick(View v) {
                     String songId = songs.get(getPosition()).getIdbaihat();
-                    BaihathotAdapter.likeButtonOnClick(imgLike, songId, context);
+//                    likeButtonOnClick(imgLike, songId, context);
                 }
             });
         }
