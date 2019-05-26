@@ -26,6 +26,15 @@ public class Song implements Parcelable {
     @Expose
     private String luotthich;
 
+    public Song(String idBaiHat, String tenbaihat, String hinhbaihat, String casi, String linkbaihat, String luotthich) {
+        this.idBaiHat = idBaiHat;
+        this.tenbaihat = tenbaihat;
+        this.hinhbaihat = hinhbaihat;
+        this.casi = casi;
+        this.linkbaihat = linkbaihat;
+        this.luotthich = luotthich;
+    }
+
     protected Song(Parcel in) {
         idBaiHat = in.readString();
         tenbaihat = in.readString();

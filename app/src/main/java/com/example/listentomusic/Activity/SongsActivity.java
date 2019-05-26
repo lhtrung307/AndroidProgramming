@@ -78,6 +78,17 @@ public class SongsActivity extends AppCompatActivity {
             setValueInView(album.getTenAlbum(), album.getHinhAlbum());
             GetDataAlbum(album.getIdAlbum());
         }
+        if(songs != null){
+            if(songs.size()>0)
+            setValueInView(songs.get(0).getTenbaihat(),songs.get(0).getHinhbaihat());
+            GetSongsData();
+        }
+    }
+    private void GetSongsData(){
+        songsAdapter = new BaihathotAdapter(SongsActivity.this, songs);
+        recyclerViewSongs.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
+        recyclerViewSongs.setAdapter(songsAdapter);
+        eventClick();
     }
 
     private void GetDataAlbum(String idAlbum) {
@@ -218,6 +229,9 @@ public class SongsActivity extends AppCompatActivity {
         if(intent.hasExtra("album")){
             album = (Album) intent.getSerializableExtra("album");
 
+        }
+        if(intent.hasExtra("local")){
+            songs = (ArrayList<Song>) intent.getSerializableExtra("local");
         }
 
     }
