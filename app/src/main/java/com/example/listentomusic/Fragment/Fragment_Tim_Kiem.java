@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.listentomusic.Adapter.BaihathotAdapter;
-import com.example.listentomusic.Adapter.SearchBaiHatAdapter;
 import com.example.listentomusic.Model.Song;
 import com.example.listentomusic.R;
 import com.example.listentomusic.Service.APIService;
