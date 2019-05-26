@@ -290,7 +290,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
             mediaPlayer.stop();
             mediaPlayer.release();
-            return true;
+            mediaPlayer = null;
         }
         return super.onKeyDown(keyCode, event);
     }
