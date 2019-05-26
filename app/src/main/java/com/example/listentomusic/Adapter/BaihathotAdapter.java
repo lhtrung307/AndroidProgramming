@@ -30,6 +30,7 @@ import retrofit2.Response;
 public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.ViewHolder>  {
     Context context;
     ArrayList<Song> songs;
+    static boolean flag = false;
 
     public BaihathotAdapter(Context context, ArrayList<Song> songs) {
         this.context = context;
@@ -67,7 +68,10 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
             songName = itemView.findViewById(R.id.textviewtenbaihathot);
             artistName = itemView.findViewById(R.id.textviewcasibaihathot);
             songImg = itemView.findViewById(R.id.imageviewbaihathot);
-            imgLike =itemView.findViewById(R.id.imageviewluotthich);
+            imgLike = itemView.findViewById(R.id.imageviewluotthich);
+            if(MainActivity.username == null || MainActivity.username.equals("")){
+                imgLike.setVisibility(View.GONE);
+            }
             DataService dataService = APIService.getService();
             Call<List<Song>> callback = dataService.GetListSongLikedByUser(MainActivity.username);
             callback.enqueue(new Callback<List<Song>>() {
@@ -79,7 +83,6 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                         Log.d("BBB", "onResponse: " + song.getTenbaihat() + " " + songs.get(getPosition()).getTenbaihat());
                         if(song.getIdbaihat().equals(songs.get(getPosition()).getIdbaihat())){
                             imgLike.setImageResource(R.drawable.iconloved);
-                            imgLike.setEnabled(false);
                         }
                     }
                 }
@@ -89,7 +92,6 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
 
                 }
             });
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,44 +113,82 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
         }
     }
 
-    public static void likeButtonOnClick(ImageView imgLike, final String songId, final Context context){
-        imgLike.setImageResource(R.drawable.iconloved);
-        DataService dataService = APIService.getService();
-        Call<String> callback = dataService.UpdateLuotThich("1", songId);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String ketqua = response.body();
-                if (ketqua.equals("Success")){
-                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                } else{
-                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-        if( MainActivity.username != null){
-            Call<String> callback1 = dataService.UserLikeBaiHat(MainActivity.username, songId);
-            callback1.enqueue(new Callback<String>() {
+    public static void likeButtonOnClick(final ImageView imgLike, final String songId, final Context context){
+        if(MainActivity.username != null){
+            Log.d("DDD", MainActivity.username);
+            imgLike.setImageResource(R.drawable.iconloved);
+            final DataService dataService = APIService.getService();
+            Call<List<Song>> getLikedSongs = dataService.GetListSongLikedByUser(MainActivity.username);
+            getLikedSongs.enqueue(new Callback<List<Song>>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if(response.body().equals("Success")){
-                        Toast.makeText(context, "Đã thêm vào bài hát yêu thích của bạn", Toast.LENGTH_SHORT).show();
-                    } else{
-                        Toast.makeText(context, "Thêm vào bài hát yêu thích không thành công", Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                    ArrayList<Song> likedSongs = (ArrayList<Song>) response.body();
+
+                    for(Song song: likedSongs){
+                        if(song.getIdbaihat().equals(songId)){
+                            Call<String> deleteLuotThichUser = dataService.DeleteUserLikeBaiHat(MainActivity.username, songId);
+                            deleteLuotThichUser.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    flag = false;
+                                    if(response.body().equals("Success")){
+                                        Toast.makeText(context,"Đã hủy yêu thích", Toast.LENGTH_SHORT).show();
+                                        imgLike.setImageResource(R.drawable.iconlove);
+                                        flag = true;
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+
+                                }
+                            });
+
+                            break;
+                        }
+                    }
+                    if (!flag){
+                        Call<String> callback = dataService.UpdateLuotThich("1", songId);
+                        callback.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                String ketqua = response.body();
+                                if (ketqua.equals("Success")){
+                                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                                } else{
+                                    Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+                        Call<String> callback1 = dataService.UserLikeBaiHat(MainActivity.username, songId);
+                        callback1.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if(response.body().equals("Success")){
+                                    Toast.makeText(context, "Đã thêm vào bài hát yêu thích của bạn", Toast.LENGTH_SHORT).show();
+                                } else{
+                                    Toast.makeText(context, "Thêm vào bài hát yêu thích không thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
                     }
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<List<Song>> call, Throwable t) {
 
                 }
             });
         }
-        imgLike.setEnabled(false);
     }
 }
