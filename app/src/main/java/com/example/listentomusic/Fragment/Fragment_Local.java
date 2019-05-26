@@ -67,7 +67,7 @@ public class Fragment_Local extends Fragment {
                     for(File file: home.listFiles(new Mp3Fielter())){
                         listSongdemo.add(file.getName());
                         getNameMusic=listSongdemo.get(i).split("_");
-                        songLocals.add(new Song("",getNameMusic[0],"https://static-zmp3.zadn.vn/skins/common/logo600.png","",MEDIA_PATH+""+file.getName(),""));
+                        songLocals.add(new Song("",getNameMusic[0],"https://static-zmp3.zadn.vn/skins/common/logo600.png",getNameMusic[1],MEDIA_PATH+""+file.getName(),""));
                         System.out.println("list file doc tu android ne: "+listSongdemo.get(i++));
                     }
                 }

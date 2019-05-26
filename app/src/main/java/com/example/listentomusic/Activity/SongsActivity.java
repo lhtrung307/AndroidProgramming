@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.listentomusic.Adapter.BaihathotAdapter;
-import com.example.listentomusic.Adapter.SongsAdapter;
 import com.example.listentomusic.Model.Album;
 import com.example.listentomusic.Model.Genre;
 import com.example.listentomusic.Model.Song;
